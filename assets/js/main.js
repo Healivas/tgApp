@@ -40,6 +40,19 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+function switchBlur(colorClass) {
+  const blur = document.querySelector(".blur");
+  if (!blur) return;
+
+  blur.classList.remove("blur__white", "blur__blue", "blur__red");
+
+  void blur.offsetHeight;
+
+  requestAnimationFrame(() => {
+    blur.classList.add(colorClass);
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const buyButton = document.getElementById("buyButton");
   const giftButton = document.getElementById("giftButton");
@@ -109,8 +122,8 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       errorBlock.style.display = "block";
       giftWrapper.classList.add("error");
-      document.querySelector(".blur").className = "blur blur__red";
-      document.querySelector(".blur").offsetHeight;
+      switchBlur("blur__red");
+
       if (Telegram?.WebApp?.HapticFeedback) {
         Telegram.WebApp.HapticFeedback.notificationOccurred("error");
       }
@@ -201,14 +214,10 @@ document.addEventListener("DOMContentLoaded", () => {
     wrappers.forEach((wrapper) => {
       if (rawValue >= MIN_VALUE) {
         wrapper.classList.add("success");
-        blur.classList.add("blur__blue");
-        blur.classList.remove("blur__white");
-        void blur.offsetHeight;
+        switchBlur("blur__blue");
       } else {
         wrapper.classList.remove("success");
-        blur.classList.remove("blur__blue");
-        blur.classList.add("blur__white");
-        void blur.offsetHeight;
+        switchBlur("blur__white");
       }
     });
   }
@@ -287,7 +296,6 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const cardsContainer = document.querySelector(".buy__bottom-cards");
   const payButton = document.getElementById("payButton");
-  const blur = document.querySelector(".blur");
   if (!cardsContainer || !payButton) return;
 
   const cards = cardsContainer.querySelectorAll(".card");
@@ -297,8 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
       cards.forEach((c) => c.classList.remove("active"));
       card.classList.add("active");
       payButton.removeAttribute("disabled");
-      blur.className = "blur blur__blue";
-      void blur.offsetHeight;
+      switchBlur("blur__blue");
     });
   });
 });
@@ -659,36 +666,31 @@ function updateHeaderForPage(pageId) {
       currencyHeader.classList.add("active");
       backHeader.classList.remove("active");
       historyHeader.classList.remove("active");
-      blur.className = "blur blur__blue";
+      switchBlur("blur__blue");
       clearInput("#giftInput", "gift");
-      void blur.offsetHeight;
       break;
     case "buy":
       currencyHeader.classList.remove("active");
       backHeader.classList.add("active");
       historyHeader.classList.remove("active");
-      blur.className = "blur blur__white";
-      void blur.offsetHeight;
+      switchBlur("blur__white");
       clearInput();
       break;
     case "gift":
       currencyHeader.classList.remove("active");
       backHeader.classList.add("active");
       historyHeader.classList.remove("active");
-      blur.className = "blur blur__white";
-      void blur.offsetHeight;
+      switchBlur("blur__white");
       clearInput();
       break;
     case "purchase":
-      blur.className = "blur blur__white";
-      void blur.offsetHeight;
+      switchBlur("blur__white");
       break;
     case "history":
       currencyHeader.classList.remove("active");
       backHeader.classList.remove("active");
       historyHeader.classList.add("active");
-      blur.className = "blur";
-      void blur.offsetHeight;
+      switchBlur("");
       break;
     default:
       currencyHeader.classList.remove("active");
@@ -721,6 +723,11 @@ function updateHeaderForPage(pageId) {
       targetBottom.classList.add("active");
     }
   }
+
+  const giftWrapper = document.querySelector(".buy__gift");
+  const giftError = document.querySelector(".buy__gift-error");
+  if (giftWrapper) giftWrapper.classList.remove("error");
+  if (giftError) giftError.style.display = "none";
 }
 
 function clearInput(selector = ".buy__input", clearType = "both") {
@@ -755,3 +762,23 @@ function disableAllPurchaseButtons() {
     btn.setAttribute("disabled", "");
   });
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  Telegram.WebApp.ready();
+
+  if (Telegram.WebApp.setHeaderColor) {
+    Telegram.WebApp.setHeaderColor("bg_color");
+  }
+
+  if (Telegram.WebApp.setBottomBarColor) {
+    Telegram.WebApp.setBottomBarColor("#ffffff");
+  }
+
+  const theme = Telegram.WebApp.themeParams;
+  document.body.style.backgroundColor = theme.bg_color;
+
+  Telegram.WebApp.onEvent("themeChanged", () => {
+    const updatedTheme = Telegram.WebApp.themeParams;
+    document.body.style.backgroundColor = updatedTheme.bg_color;
+  });
+});
