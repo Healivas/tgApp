@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
   </head>
 
   <body>
@@ -16,7 +17,7 @@
         <header class="header">
           <div id="blur" class="blur blur__blue"></div>
           <div id="currencyHeader" class="container active">
-            <button onclick="window.open('https://t.me/durov', '_blank')" class="button button__circle">
+            <button onclick="Telegram.WebApp.openLink('https://t.me/durov')" class="button button__circle">
               <svg><use xlink:href="assets/img/icon.svg#ask"></use></svg>
             </button>
             <div class="header__logo">
@@ -41,7 +42,7 @@
             <div class="header__logo">
               <span id="pageName">Подарок</span>
             </div>
-            <button onclick="window.open('https://t.me/durov', '_blank')" class="button button__circle">
+            <button onclick="Telegram.WebApp.openLink('https://t.me/durov')" class="button button__circle">
               <svg><use xlink:href="assets/img/icon.svg#ask"></use></svg>
             </button>
           </div>
