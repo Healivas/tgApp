@@ -792,6 +792,10 @@ html {
           flex-direction: column;
 }
 
+html {
+  background-color: var(--bg-default);
+}
+
 main {
   -webkit-box-flex: 1;
       -ms-flex: 1 1 auto;
@@ -806,7 +810,6 @@ main {
 }
 
 .wrapper {
-  min-height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

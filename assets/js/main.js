@@ -767,7 +767,7 @@ document.addEventListener("DOMContentLoaded", () => {
   Telegram.WebApp.ready();
 
   if (Telegram.WebApp.setHeaderColor) {
-    Telegram.WebApp.setHeaderColor("bg_color");
+    Telegram.WebApp.setHeaderColor("#0d1017");
   }
 
   if (Telegram.WebApp.setBottomBarColor) {
