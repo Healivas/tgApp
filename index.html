@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>NotStars</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
+    <link href="assets/css/styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  </head>
+
+  <body>
+    <div class="wrapper active">
+      <div class="wrapper__top">
+        <header class="header">
+          <div id="blur" class="blur blur__blue"></div>
+          <div id="currencyHeader" class="container active">
+            <button onclick="Telegram.WebApp.openLink('https://t.me/durov')" class="button button__circle">
+              <svg><use xlink:href="assets/img/icon.svg#ask"></use></svg>
+            </button>
+            <div class="header__logo">
+              <svg><use xlink:href="assets/img/icon.svg#logo"></use></svg>
+              <span>NotStars</span>
+            </div>
+            <div class="switch">
+              <div class="currency ruble">
+                <button class="ruble active">
+                  <svg><use xlink:href="assets/img/icon.svg#ruble"></use></svg>
+                </button>
+                <button class="usd">
+                  <svg><use xlink:href="assets/img/icon.svg#usd"></use></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div id="backHeader" class="container">
+            <button onclick="goTo('home')" class="button button__circle">
+              <svg class="back"><use xlink:href="assets/img/icon.svg#chevron_left"></use></svg>
+            </button>
+            <div class="header__logo">
+              <span id="pageName">Подарок</span>
+            </div>
+            <button onclick="Telegram.WebApp.openLink('https://t.me/durov')" class="button button__circle">
+              <svg><use xlink:href="assets/img/icon.svg#ask"></use></svg>
+            </button>
+          </div>
+          <div id="historyHeader" class="container">
+            <button onclick="goTo('home')" class="button button__circle">
+              <svg class="back"><use xlink:href="assets/img/icon.svg#chevron_left"></use></svg>
+            </button>
+            <div class="header__logo">
+              <svg><use xlink:href="assets/img/icon.svg#logo"></use></svg>
+              <span>NotStars</span>
+            </div>
+            <div class="switch">
+              <div class="currency ruble">
+                <button class="ruble active">
+                  <svg><use xlink:href="assets/img/icon.svg#ruble"></use></svg>
+                </button>
+                <button class="usd">
+                  <svg><use xlink:href="assets/img/icon.svg#usd"></use></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+        <main id="home" class="main active">
+          <div class="buy__wrapper success">
+            <div class="buy__text">Вы купили</div>
+            <div class="buy__inner">
+              <div class="buy__number">175</div>
+              <div class="buy__star">
+                <svg><use xlink:href="assets/img/icon.svg#star_gray"></use></svg>
+              </div>
+            </div>
+            <div class="buy__actions">
+              <button onclick="goTo('buy')">
+                <div class="button button button__circle button__blue">
+                  <svg><use xlink:href="assets/img/icon.svg#star_white"></use></svg>
+                </div>
+                <span>Купить</span>
+              </button>
+              <button onclick="goTo('gift')">
+                <div class="button button button__circle">
+                  <svg><use xlink:href="assets/img/icon.svg#gift"></use></svg>
+                </div>
+                <span>Подарить</span>
+              </button>
+            </div>
+            <div class="history__wrapper empty">
+              <div class="history__empty">
+                <svg><use xlink:href="assets/img/icon.svg#star_empty"></use></svg>
+                <div class="history__empty-error">Нет транзакций</div>
+                <div class="history__empty-text">
+                  Купите звёзды себе или подарите другу,<br />
+                  все ваши транзакции будут отображаться здесь
+                </div>
+              </div>
+              <div class="history">
+                <div onclick="goTo('history')" class="history__text">История транзакций</div>
+                <div class="history__inner">
+                  <div class="block">
+                    <div class="block__top">
+                      <div class="username">@Username</div>
+                      <div class="amount">
+                        <div class="amount__star">
+                          <span>500</span>
+                          <svg><use xlink:href="assets/img/icon.svg#star_mini"></use></svg>
+                        </div>
+                        <div class="amount__currency">(<span>1,000</span> ₽)</div>
+                      </div>
+                    </div>
+                    <div class="block__bottom">
+                      <div class="badge warn">В обработке</div>
+                      <div class="time">23.05.2025 12:00 AM</div>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <div class="block__top">
+                      <div class="username">@Username</div>
+                      <div class="amount">
+                        <div class="amount__star">
+                          <span>500</span>
+                          <svg><use xlink:href="assets/img/icon.svg#star_mini"></use></svg>
+                        </div>
+                        <div class="amount__currency">(<span>1,000</span> ₽)</div>
+                      </div>
+                    </div>
+                    <div class="block__bottom">
+                      <div class="badge success">В обработке</div>
+                      <div class="time">23.05.2025 12:00 AM</div>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <div class="block__top">
+                      <div class="username">@Username</div>
+                      <div class="amount">
+                        <div class="amount__star">
+                          <span>500</span>
+                          <svg><use xlink:href="assets/img/icon.svg#star_mini"></use></svg>
+                        </div>
+                        <div class="amount__currency">(<span>1,000</span> ₽)</div>
+                      </div>
+                    </div>
+                    <div class="block__bottom">
+                      <div class="badge error">В обработке</div>
+                      <div class="time">23.05.2025 12:00 AM</div>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <div class="block__top">
+                      <div class="username">@Username</div>
+                      <div class="amount">
+                        <div class="amount__star">
+                          <span>500</span>
+                          <svg><use xlink:href="assets/img/icon.svg#star_mini"></use></svg>
+                        </div>
+                        <div class="amount__currency">(<span>1,000</span> ₽)</div>
+                      </div>
+                    </div>
+                    <div class="block__bottom">
+                      <div class="badge error">В обработке</div>
+                      <div class="time">23.05.2025 12:00 AM</div>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <div class="block__top">
+                      <div class="username">@Username</div>
+                      <div class="amount">
+                        <div class="amount__star">
+                          <span>500</span>
+                          <svg><use xlink:href="assets/img/icon.svg#star_mini"></use></svg>
+                        </div>
+                        <div class="amount__currency">(<span>1,000</span> ₽)</div>
+                      </div>
+                    </div>
+                    <div class="block__bottom">
+                      <div class="badge error">В обработке</div>
+                      <div class="time">23.05.2025 12:00 AM</div>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <div class="block__top">
+                      <div class="username">@Username</div>
+                      <div class="amount">
+                        <div class="amount__star">
+                          <span>500</span>
+                          <svg><use xlink:href="assets/img/icon.svg#star_mini"></use></svg>
+                        </div>
+                        <div class="amount__currency">(<span>1,000</span> ₽)</div>
+                      </div>
+                    </div>
+                    <div class="block__bottom">
+                      <div class="badge error">В обработке</div>
+                      <div class="time">23.05.2025 12:00 AM</div>
+                    </div>
+                  </div>
+                  <div class="block">
+                    <div class="block__top">
+                      <div class="username">@Username</div>
+                      <div class="amount">
+                        <div class="amount__star">
+                          <span>500</span>
+                          <svg><use xlink:href="assets/img/icon.svg#star_mini"></use></svg>
+                        </div>
+                        <div class="amount__currency">(<span>1,000</span> ₽)</div>
+                      </div>
+                    </div>
+                    <div class="block__bottom">
+                      <div class="badge error">В обработке</div>
+                      <div class="time">23.05.2025 12:00 AM</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+        <main id="buy" class="main">
+          <div class="buy__wrapper">
+            <div class="buy__text">К оплате: <span class="buySum">0</span> <span id="buyCurrency">₽</span></div>
+            <div class="buy__inner">
+              <input id="buyInput" type="number" placeholder="0" class="buy__input" />
+              <div class="buy__star">
+                <svg><use xlink:href="assets/img/icon.svg#star_gray"></use></svg>
+              </div>
+              <span class="hidden ruler"></span>
+            </div>
+            <div class="buy__help">
+              <button>100</button>
+              <button>500</button>
+              <button>1,000</button>
+              <button>5,000</button>
+            </div>
+          </div>
+        </main>
+        <main id="gift" class="main">
+          <div class="buy__wrapper">
+            <div class="buy__text">К оплате: <span class="giftSum">0</span> <span id="giftCurrency">₽</span></div>
+            <div class="buy__inner">
+              <input id="giftInput" type="number" placeholder="0" class="buy__input" />
+              <div class="buy__star">
+                <svg><use xlink:href="assets/img/icon.svg#star_gray"></use></svg>
+              </div>
+              <span class="hidden ruler"></span>
+            </div>
+            <div class="buy__help">
+              <button>100</button>
+              <button>500</button>
+              <button>1,000</button>
+              <button>5,000</button>
+            </div>
+          </div>
+        </main>
+        <main id="purchase" class="main">
+          <div class="buy__wrapper">
+            <div class="buy__text">Вы покупаете</div>
+            <div class="buy__inner">
+              <div class="buy__number" id="sum"></div>
+              <div class="buy__star">
+                <svg><use xlink:href="assets/img/icon.svg#star_yellow"></use></svg>
+              </div>
+            </div>
+            <div class="buy__recipient" id="recipientBlock" style="display: none">Получатель: <span id="recipient">@Username</span></div>
+          </div>
+        </main>
+        <main id="purchaseSuccess" class="main">
+          <div class="buy__wrapper">
+            <div class="success__icon">
+              <img src="assets/img/stars.svg" alt="" />
+            </div>
+            <div class="h1">Спасибо за оплату!</div>
+            <div class="h2">
+              Ваши звёзды в ближайшее время <br />
+              будут зачислены на ваш баланс
+            </div>
+          </div>
+        </main>
+        <main id="history" class="main">
+          <div class="history__wrapper empty">
+            <div class="history__empty">
+              <svg><use xlink:href="assets/img/icon.svg#star_empty"></use></svg>
+              <div class="history__empty-error">Нет транзакций</div>
+              <div class="history__empty-text">
+                Купите звёзды себе или подарите другу,<br />
+                все ваши транзакции будут отображаться здесь
+              </div>
+            </div>
+            <div class="history">
+              <div class="history__inner">
+                <div class="block">
+                  <div class="block__top">
+                    <div class="username">@Username</div>
+                    <div class="amount">
+                      <div class="amount__star">
+                        <span>500</span>
+                        <svg><use xlink:href="assets/img/icon.svg#star_mini"></use></svg>
+                      </div>
+                      <div class="amount__currency">(<span>1,000</span> ₽)</div>
+                    </div>
+                  </div>
+                  <div class="block__bottom">
+                    <div class="badge warn">В обработке</div>
+                    <div class="time">23.05.2025 12:00 AM</div>
+                  </div>
+                </div>
+                <div class="block">
+                  <div class="block__top">
+                    <div class="username">@Username</div>
+                    <div class="amount">
+                      <div class="amount__star">
+                        <span>500</span>
+                        <svg><use xlink:href="assets/img/icon.svg#star_mini"></use></svg>
+                      </div>
+                      <div class="amount__currency">(<span>1,000</span> ₽)</div>
+                    </div>
+                  </div>
+                  <div class="block__bottom">
+                    <div class="badge success">В обработке</div>
+                    <div class="time">23.05.2025 12:00 AM</div>
+                  </div>
+                </div>
+                <div class="block">
+                  <div class="block__top">
+                    <div class="username">@Username</div>
+                    <div class="amount">
+                      <div class="amount__star">
+                        <span>500</span>
+                        <svg><use xlink:href="assets/img/icon.svg#star_mini"></use></svg>
+                      </div>
+                      <div class="amount__currency">(<span>1,000</span> ₽)</div>
+                    </div>
+                  </div>
+                  <div class="block__bottom">
+                    <div class="badge error">В обработке</div>
+                    <div class="time">23.05.2025 12:00 AM</div>
+                  </div>
+                </div>
+                <div class="block">
+                  <div class="block__top">
+                    <div class="username">@Username</div>
+                    <div class="amount">
+                      <div class="amount__star">
+                        <span>500</span>
+                        <svg><use xlink:href="assets/img/icon.svg#star_mini"></use></svg>
+                      </div>
+                      <div class="amount__currency">(<span>1,000</span> ₽)</div>
+                    </div>
+                  </div>
+                  <div class="block__bottom">
+                    <div class="badge error">В обработке</div>
+                    <div class="time">23.05.2025 12:00 AM</div>
+                  </div>
+                </div>
+                <div class="block">
+                  <div class="block__top">
+                    <div class="username">@Username</div>
+                    <div class="amount">
+                      <div class="amount__star">
+                        <span>500</span>
+                        <svg><use xlink:href="assets/img/icon.svg#star_mini"></use></svg>
+                      </div>
+                      <div class="amount__currency">(<span>1,000</span> ₽)</div>
+                    </div>
+                  </div>
+                  <div class="block__bottom">
+                    <div class="badge error">В обработке</div>
+                    <div class="time">23.05.2025 12:00 AM</div>
+                  </div>
+                </div>
+                <div class="block">
+                  <div class="block__top">
+                    <div class="username">@Username</div>
+                    <div class="amount">
+                      <div class="amount__star">
+                        <span>500</span>
+                        <svg><use xlink:href="assets/img/icon.svg#star_mini"></use></svg>
+                      </div>
+                      <div class="amount__currency">(<span>1,000</span> ₽)</div>
+                    </div>
+                  </div>
+                  <div class="block__bottom">
+                    <div class="badge error">В обработке</div>
+                    <div class="time">23.05.2025 12:00 AM</div>
+                  </div>
+                </div>
+                <div class="block">
+                  <div class="block__top">
+                    <div class="username">@Username</div>
+                    <div class="amount">
+                      <div class="amount__star">
+                        <span>500</span>
+                        <svg><use xlink:href="assets/img/icon.svg#star_mini"></use></svg>
+                      </div>
+                      <div class="amount__currency">(<span>1,000</span> ₽)</div>
+                    </div>
+                  </div>
+                  <div class="block__bottom">
+                    <div class="badge error">В обработке</div>
+                    <div class="time">23.05.2025 12:00 AM</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+      <div id="buyBottom" class="wrapper__bottom">
+        <div class="container">
+          <div class="buy__bottom">
+            <button onclick="goTo('purchase')" id="buyButton" class="purchaseButton" disabled>Далее</button>
+            <div class="buy__bottom-text">Минимальная сумма пополнения 50 Звёзд</div>
+          </div>
+        </div>
+      </div>
+      <div id="giftBottom" class="wrapper__bottom">
+        <div class="container">
+          <div class="buy__bottom">
+            <div class="buy__username">
+              <div class="buy__gift">
+                <svg><use xlink:href="assets/img/icon.svg#username"></use></svg>
+                <input id="userInput" type="text" placeholder="Введите Telegram получателя" />
+              </div>
+              <div class="buy__gift-error" style="display: none">Неверный телеграм, проверьте и попробуйте снова</div>
+            </div>
+            <button id="giftButton" class="purchaseButton" disabled>Далее</button>
+            <div class="buy__bottom-text">Минимальная сумма пополнения 50 Звёзд</div>
+          </div>
+        </div>
+      </div>
+      <div id="purchaseBottom" class="wrapper__bottom">
+        <div class="container">
+          <div class="buy__bottom">
+            <div class="buy__bottom-wrapper">
+              <div class="buy__bottom-way">Выберите способ оплаты</div>
+              <div class="buy__bottom-cards">
+                <div class="card">
+                  <div class="card__left">
+                    <div class="card__icon">
+                      <svg><use xlink:href="assets/img/icon.svg#card"></use></svg>
+                    </div>
+                    <div class="card__col">
+                      <div class="card__top">Банковская карта <span>Комиссия 2%</span></div>
+                      <div class="card__bottom">10,000 RUB</div>
+                    </div>
+                  </div>
+                  <div class="card__check"></div>
+                </div>
+                <div class="card">
+                  <div class="card__left">
+                    <div class="card__icon">
+                      <svg><use xlink:href="assets/img/icon.svg#ton"></use></svg>
+                    </div>
+                    <div class="card__col">
+                      <div class="card__top">TON</div>
+                      <div class="card__bottom">38.86 TON</div>
+                    </div>
+                  </div>
+                  <div class="card__check"></div>
+                </div>
+                <div class="card">
+                  <div class="card__left">
+                    <div class="card__icon">
+                      <svg><use xlink:href="assets/img/icon.svg#sbp"></use></svg>
+                    </div>
+                    <div class="card__col">
+                      <div class="card__top">СБП <span>Комиссия 2%</span></div>
+                      <div class="card__bottom">10,000 RUB</div>
+                    </div>
+                  </div>
+                  <div class="card__check"></div>
+                </div>
+              </div>
+            </div>
+            <button id="payButton" onclick="goTo('purchaseSuccess')" disabled>Перейти к оплате</button>
+            <button onclick="goTo('back')" class="button__back">Назад</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
