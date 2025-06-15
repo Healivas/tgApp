@@ -1460,9 +1460,10 @@ input[type=number] {
 }
 .history__wrapper {
   position: relative;
-  max-width: 358px;
+  max-width: 390px;
   margin: 0 auto;
   width: 100%;
+  padding: 0 16px;
 }
 .history__wrapper.empty .history__empty {
   display: -webkit-box;

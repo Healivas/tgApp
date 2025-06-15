@@ -1398,9 +1398,10 @@ input[type=number] {
 
   &__wrapper {
     position: relative;
-    max-width: 358px;
+    max-width: 390px;
     margin: 0 auto;
     width: 100%;
+    padding: 0 16px;
 
     &.empty {
       .history__empty {
