@@ -110,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
       errorBlock.style.display = "block";
       giftWrapper.classList.add("error");
       document.querySelector(".blur").className = "blur blur__red";
-
+      document.querySelector(".blur").offsetHeight;
       if (Telegram?.WebApp?.HapticFeedback) {
         Telegram.WebApp.HapticFeedback.notificationOccurred("error");
       }
@@ -203,10 +203,12 @@ document.addEventListener("DOMContentLoaded", () => {
         wrapper.classList.add("success");
         blur.classList.add("blur__blue");
         blur.classList.remove("blur__white");
+        void blur.offsetHeight;
       } else {
         wrapper.classList.remove("success");
         blur.classList.remove("blur__blue");
         blur.classList.add("blur__white");
+        void blur.offsetHeight;
       }
     });
   }
@@ -296,6 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
       card.classList.add("active");
       payButton.removeAttribute("disabled");
       blur.className = "blur blur__blue";
+      void blur.offsetHeight;
     });
   });
 });
@@ -644,7 +647,6 @@ function updateHeaderForPage(pageId) {
     gift: "Подарок",
     purchase: "Выберите способ оплаты",
     purchaseSuccess: "Заказ оплачен",
-    ask: "Задать вопрос",
     history: "История транзакций",
   };
 
@@ -659,12 +661,14 @@ function updateHeaderForPage(pageId) {
       historyHeader.classList.remove("active");
       blur.className = "blur blur__blue";
       clearInput("#giftInput", "gift");
+      void blur.offsetHeight;
       break;
     case "buy":
       currencyHeader.classList.remove("active");
       backHeader.classList.add("active");
       historyHeader.classList.remove("active");
       blur.className = "blur blur__white";
+      void blur.offsetHeight;
       clearInput();
       break;
     case "gift":
@@ -672,21 +676,19 @@ function updateHeaderForPage(pageId) {
       backHeader.classList.add("active");
       historyHeader.classList.remove("active");
       blur.className = "blur blur__white";
+      void blur.offsetHeight;
       clearInput();
       break;
     case "purchase":
       blur.className = "blur blur__white";
+      void blur.offsetHeight;
       break;
     case "history":
       currencyHeader.classList.remove("active");
       backHeader.classList.remove("active");
       historyHeader.classList.add("active");
       blur.className = "blur";
-      break;
-    case "ask":
-      currencyHeader.classList.remove("active");
-      backHeader.classList.add("active");
-      historyHeader.classList.remove("active");
+      void blur.offsetHeight;
       break;
     default:
       currencyHeader.classList.remove("active");
