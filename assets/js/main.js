@@ -774,9 +774,9 @@ document.addEventListener("DOMContentLoaded", () => {
     Telegram.WebApp.setBottomBarColor("#ffffff");
   }
 
-  document.body.style.backgroundColor = "#0d1017";
+  document.body.style.backgroundColor = "#fff";
 
   Telegram.WebApp.onEvent("themeChanged", () => {
-    document.body.style.backgroundColor = "#0d1017";
+    document.body.style.backgroundColor = "#fff";
   });
 });
