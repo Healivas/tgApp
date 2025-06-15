@@ -106,11 +106,6 @@ document.addEventListener("DOMContentLoaded", () => {
       document.querySelector(".buy__gift-error").style.display = "block";
       document.querySelector(".buy__gift").classList.add("error");
       document.querySelector(".blur").className = "blur blur__red";
-
-      // Haptic Feedback on error
-      if (Telegram?.WebApp?.HapticFeedback) {
-        Telegram.WebApp.HapticFeedback.notificationOccurred("error");
-      }
     }
   });
 });
