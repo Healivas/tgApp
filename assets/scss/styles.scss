@@ -788,6 +788,17 @@ html {
   flex-direction: column
 }
 
+html {
+  background: var(--bg-default);
+}
+
+html,
+body,
+.wrapper {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 main {
   flex: 1 1 auto
 }
