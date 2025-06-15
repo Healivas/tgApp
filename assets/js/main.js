@@ -93,8 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const users = await API.getUsers();
 
     if (users.includes(username)) {
-      document.querySelector(".buy__gift-error").style.display = "none";
-      document.querySelector(".buy__gift").classList.remove("error");
+      errorBlock.style.display = "none";
+      giftWrapper.classList.remove("error");
 
       goTo("purchase");
 
@@ -102,10 +102,18 @@ document.addEventListener("DOMContentLoaded", () => {
         transferInputValueToSum();
         updateCardSums();
       }, 0);
+
+      if (Telegram?.WebApp?.HapticFeedback) {
+        Telegram.WebApp.HapticFeedback.notificationOccurred("success");
+      }
     } else {
-      document.querySelector(".buy__gift-error").style.display = "block";
-      document.querySelector(".buy__gift").classList.add("error");
+      errorBlock.style.display = "block";
+      giftWrapper.classList.add("error");
       document.querySelector(".blur").className = "blur blur__red";
+
+      if (Telegram?.WebApp?.HapticFeedback) {
+        Telegram.WebApp.HapticFeedback.notificationOccurred("error");
+      }
     }
   });
 });
