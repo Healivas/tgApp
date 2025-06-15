@@ -771,14 +771,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (Telegram.WebApp.setBottomBarColor) {
-    Telegram.WebApp.setBottomBarColor("#ffffff");
+    Telegram.WebApp.setBottomBarColor("#0d1017");
   }
-
-  const theme = Telegram.WebApp.themeParams;
-  document.body.style.backgroundColor = theme.bg_color;
-
-  Telegram.WebApp.onEvent("themeChanged", () => {
-    const updatedTheme = Telegram.WebApp.themeParams;
-    document.body.style.backgroundColor = updatedTheme.bg_color;
-  });
 });
