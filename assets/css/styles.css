@@ -1585,14 +1585,10 @@ input[type=number] {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  width: 32px;
-  height: 32px;
 }
 .buy__star svg {
   width: 32px;
   height: 32px;
-  position: absolute;
-  left: 0;
 }
 .buy__actions {
   display: -webkit-box;
