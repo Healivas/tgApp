@@ -805,6 +805,13 @@ main {
 
 .vis {
   overflow: visible !important;
+
+  &.active {
+    img {
+      animation: fadeIn ease forwards;
+      animation-duration: 1.5s;
+    }
+  }
 }
 
 .main {
@@ -817,7 +824,7 @@ main {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  transition: all .3s;
+  transition: all .3s ease-in-out;
   height: 0;
   overflow: hidden;
 
@@ -852,11 +859,11 @@ main {
     transform: translateX(-50%) translateZ(0);
     z-index: 0;
     pointer-events: none;
-    transition: all .2s;
+    transition: all .2s ease-in-out;
 
     img {
       opacity: 0;
-      transition: all .2s;
+      transition: all .2s ease-in-out;
       position: absolute;
     }
 
@@ -887,7 +894,7 @@ main {
     margin-top: 12px;
     border-top: 1px solid var(--border-default);
     display: none;
-    transition: all .2s;
+    transition: all .2s ease-in-out;
 
     &.active {
       display: block;
@@ -919,6 +926,72 @@ main {
     position: absolute;
     left: 0;
     top: -92px;
+  }
+}
+
+.stars {
+  width: 160px;
+  height: 105px;
+  position: relative;
+  margin: 0 auto;
+
+  img {
+    position: absolute;
+    opacity: 0;
+
+    &:nth-child(1) {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      --final-opacity: 1;
+      animation-delay: 0s;
+    }
+
+    &:nth-child(2) {
+      transform: scale(.9);
+      right: -30px;
+      top: -45px;
+      filter: blur(1.5px);
+      --final-opacity: 0.7;
+      animation-delay: 0.2s;
+    }
+
+    &:nth-child(3) {
+      transform: scale(.8) rotate(50deg);
+      left: -30px;
+      top: -40px;
+      filter: blur(1.5px);
+      --final-opacity: 0.6;
+      animation-delay: 0.4s;
+    }
+
+    &:nth-child(4) {
+      transform: scale(.7) rotate(40deg);
+      left: -30px;
+      top: 0;
+      filter: blur(1.5px);
+      --final-opacity: 0.4;
+      animation-delay: 0.6s;
+    }
+
+    &:nth-child(5) {
+      transform: scale(.7);
+      right: -30px;
+      top: 4px;
+      filter: blur(3px);
+      --final-opacity: 0.1;
+      animation-delay: 0.8s;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: var(--final-opacity);
   }
 }
 
@@ -1010,7 +1083,8 @@ main {
     width: 36px;
     height: 36px;
     min-width: 36px;
-    transition: all .2s;
+    transition: all .2s ease-in-out;
+    border-radius: 8px;
 
     &:hover {
       background: var(--bg-state-soft-press);
@@ -1037,22 +1111,30 @@ main {
   width: 36px;
   position: relative;
   border: 1px solid transparent;
-  border-radius: 9999px;
-  transition: all .2s;
+  border-radius: 8px;
+  transition: all .2s ease-in-out;
   height: 36px;
   overflow: hidden;
 
   &.active {
     border: 1px solid var(--border-default);
     background: var(--bg-input-soft);
-    height: 74px;
+    height: 73px;
 
     button:last-child {
       opacity: 1;
     }
 
     button.active {
-      background: var(--bg-state-soft-press);
+      background: var(--bg-state-soft-press) !important;
+
+      &:hover {
+        background: var(--bg-state-soft-press) !important;
+      }
+    }
+
+    button:hover {
+      background: transparent !important;
     }
   }
 
@@ -1062,7 +1144,7 @@ main {
     }
 
     button:first-child {
-      top: 37px;
+      top: 35px;
     }
   }
 
@@ -1072,8 +1154,8 @@ main {
     justify-content: center;
     width: 36px;
     height: 36px;
-    transition: all .2s;
-    border-radius: 50%;
+    transition: all .2s ease-in-out;
+    border-radius: 8px;
     position: absolute;
     left: -1px;
     top: -1px;
@@ -1087,7 +1169,7 @@ main {
     }
 
     &:last-child {
-      top: 37px;
+      top: 35px;
     }
 
     &.active {
@@ -1121,8 +1203,16 @@ input[type=number] {
 .buy {
   &__wrapper {
     &.success {
-      .buy__star svg {
-        color: #FFCA55;
+      .buy__star {
+        filter: drop-shadow(0 0 6px rgba(255, 174, 17, 0.7)) drop-shadow(0 0 20px rgba(255, 174, 17, 0.5));
+
+        svg:nth-child(1) {
+          opacity: 1;
+        }
+
+        svg:nth-child(2) {
+          opacity: 0;
+        }
       }
     }
   }
@@ -1148,6 +1238,7 @@ input[type=number] {
     align-items: center;
     gap: 6px;
     border: 1px solid transparent;
+    transition: all .2s ease-in-out;
 
     &.error {
       border: 1px solid var(--border-destructive);
@@ -1158,9 +1249,18 @@ input[type=number] {
       font-size: 12px;
       line-height: 133%;
       color: var(--text-destructive);
-      margin-top: 8px;
       text-align: left;
-      margin-bottom: 8px;
+      height: 0;
+      overflow: hidden;
+      transition: all .2s ease-in-out;
+      opacity: 0;
+
+      &.error {
+        height: auto;
+        margin-bottom: 8px;
+        margin-top: 8px;
+        opacity: 1;
+      }
     }
 
     input {
@@ -1192,7 +1292,7 @@ input[type=number] {
       font-size: 12px;
       line-height: 133%;
       color: var(--text-hint);
-      transition: all .2s;
+      transition: all .2s ease-in-out;
 
       &.red {
         color: var(--text-destructive);
@@ -1209,7 +1309,7 @@ input[type=number] {
       background: linear-gradient(0deg, #2b5df3 0%, #437dfc 100%);
       border-radius: 8px;
       padding: 10px 14px;
-      transition: all .2s;
+      transition: all .2s ease-in-out;
 
       &:disabled {
         background: var(--bg-state-disabled);
@@ -1257,7 +1357,7 @@ input[type=number] {
       justify-content: space-between;
       gap: 8px;
       cursor: pointer;
-      transition: all .2s;
+      transition: all .2s ease-in-out;
 
       &.active {
         background: var(--bg-on-subtle);
@@ -1274,7 +1374,7 @@ input[type=number] {
         border-radius: 4px;
         background-color: var(--bg-checkbox-default);
         border: 1px solid var(--border-darker);
-        transition: all .2s;
+        transition: all .2s ease-in-out;
       }
 
       &__left {
@@ -1316,7 +1416,8 @@ input[type=number] {
         }
       }
 
-      &__bottom {
+      &__bottom,
+      &__text {
         font-weight: 400;
         font-size: 14px;
         line-height: 143%;
@@ -1335,6 +1436,12 @@ input[type=number] {
     margin: 32px auto 16px auto;
   }
 
+  &__padding {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
   &__input {
     font-weight: 500;
     font-size: 48px;
@@ -1344,6 +1451,7 @@ input[type=number] {
     text-align: center;
     width: calc(100% - 36px);
     min-width: 40px;
+    caret-color: var(--bg-state-primary);
 
     &::placeholder {
       color: var(--text-subtle);
@@ -1365,6 +1473,7 @@ input[type=number] {
       border-radius: 8px;
       padding: 4px 8px;
       background: var(--bg-state-soft);
+      transition: all .2s ease-in-out;
 
       &.active {
         background: var(--bg-state-primary);
@@ -1400,11 +1509,29 @@ input[type=number] {
   }
 
   &__star {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+
     svg {
       width: 32px;
       height: 32px;
-      transition: all .2s;
+      transition: all .2s ease-in-out;
       color: #8a8c8f;
+      position: absolute;
+      left: 0;
+      transition: all .2s ease-in-out;
+
+      &:nth-child(1) {
+        opacity: 0;
+      }
+
+      &:nth-child(2) {
+        opacity: 1;
+      }
     }
   }
 
@@ -1420,7 +1547,7 @@ input[type=number] {
       flex-direction: column;
       align-items: center;
       gap: 8px;
-      transition: all .2s;
+      transition: all .2s ease-in-out;
 
       &:hover {
         opacity: .8;
@@ -1518,7 +1645,7 @@ input[type=number] {
     color: var(--zinc-00);
     margin-bottom: 16px;
     cursor: pointer;
-    transition: all .2s;
+    transition: all .2s ease-in-out;
 
     &:hover {
       opacity: .8;

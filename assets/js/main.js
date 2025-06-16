@@ -44,10 +44,16 @@ function switchBlur(colorClass) {
   const blur = document.querySelector(".blur");
   if (!blur) return;
 
+  // Если уже установлен нужный класс — выходим
+  if (blur.classList.contains(colorClass)) return;
+
+  // Удаляем все возможные цветовые классы
   blur.classList.remove("blur__white", "blur__blue", "blur__red");
 
+  // Триггерим перерисовку, чтобы анимация сбросилась
   void blur.offsetHeight;
 
+  // Добавляем нужный цвет с небольшой задержкой
   setTimeout(() => {
     blur.classList.add(colorClass);
   }, 100);
@@ -106,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const users = await API.getUsers();
 
     if (users.includes(username)) {
-      errorBlock.style.display = "none";
+      errorBlock.classList.remove("error");
       giftWrapper.classList.remove("error");
 
       goTo("purchase");
@@ -120,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
         Telegram.WebApp.HapticFeedback.notificationOccurred("success");
       }
     } else {
-      errorBlock.style.display = "block";
+      errorBlock.classList.add("error");
       giftWrapper.classList.add("error");
       switchBlur("blur__red");
 
@@ -428,6 +434,12 @@ const MockAPI = (() => {
     { login: "qwerty", stars: 500, status: "success", time: "08.06.2025 21:30" },
     { login: "durov", stars: 1000, status: "success", time: "06.06.2025 12:00" },
     { login: "healis", stars: 75, status: "processing", time: "05.06.2025 16:45" },
+    { login: "healis", stars: 75, status: "processing", time: "05.06.2025 16:45" },
+    { login: "healis", stars: 75, status: "processing", time: "05.06.2025 16:45" },
+    { login: "healis", stars: 75, status: "processing", time: "05.06.2025 16:45" },
+    { login: "healis", stars: 75, status: "processing", time: "05.06.2025 16:45" },
+    { login: "healis", stars: 75, status: "processing", time: "05.06.2025 16:45" },
+    { login: "healis", stars: 75, status: "processing", time: "05.06.2025 16:45" },
   ];
 
   return {
@@ -582,7 +594,9 @@ function goTo(pageId) {
     targetWrapper.classList.add("active");
   }
 
-  document.querySelectorAll("main:not(#home) .buy__wrapper.success").forEach((wrapper) => wrapper.classList.remove("success"));
+  document.querySelectorAll("main:not(#home):not(#purchase) .buy__wrapper.success").forEach((wrapper) => {
+    wrapper.classList.remove("success");
+  });
 
   document.querySelectorAll(".card.active").forEach((card) => {
     card.classList.remove("active");
@@ -661,7 +675,7 @@ function updateHeaderForPage(pageId) {
   const currencyHeader = document.getElementById("currencyHeader");
   const backHeader = document.getElementById("backHeader");
   const pageNameElement = document.getElementById("pageName");
-  const blur = document.querySelector(".blur");
+  const historyHeader = document.getElementById("historyHeader");
 
   const pageTitles = {
     home: "Главная",
@@ -705,7 +719,7 @@ function updateHeaderForPage(pageId) {
       currencyHeader.classList.remove("active");
       backHeader.classList.remove("active");
       historyHeader.classList.add("active");
-      switchBlur("");
+      switchBlur("blur__transparent");
       break;
     default:
       currencyHeader.classList.remove("active");
@@ -742,7 +756,7 @@ function updateHeaderForPage(pageId) {
   const giftWrapper = document.querySelector(".buy__gift");
   const giftError = document.querySelector(".buy__gift-error");
   if (giftWrapper) giftWrapper.classList.remove("error");
-  if (giftError) giftError.style.display = "none";
+  if (giftError) giftError.classList.remove("error");
 }
 
 function clearInput(selector = ".buy__input", clearType = "both") {
