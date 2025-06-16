@@ -810,10 +810,43 @@ main {
 }
 
 .main {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  -webkit-transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+  transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease, -webkit-transform 0.3s ease;
+  width: 100%;
+  max-width: 390px;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
 }
 .main.active {
-  display: block;
+  visibility: visible;
+  pointer-events: all;
+  opacity: 1;
+}
+.main.fade-in {
+  opacity: 1;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  visibility: visible;
+  pointer-events: all;
+  z-index: 1;
+}
+.main.fade-out {
+  opacity: 0;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  pointer-events: none;
+  visibility: hidden;
+  z-index: 0;
 }
 
 .wrapper {
@@ -829,15 +862,19 @@ main {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.wrapper::-webkit-scrollbar {
+  display: none;
 }
 .wrapper .blur {
-  width: 194px;
+  width: 100%;
+  max-width: 390px;
   height: 105px;
   position: absolute;
-  -webkit-filter: blur(100px);
-          filter: blur(100px);
   left: 50%;
-  top: -100px;
+  top: 0;
   -webkit-transform: translateX(-50%) translateZ(0);
           transform: translateX(-50%) translateZ(0);
   z-index: 0;
@@ -845,19 +882,30 @@ main {
   -webkit-transition: all 0.2s;
   transition: all 0.2s;
 }
-.wrapper .blur__blue {
-  background: #06f;
+.wrapper .blur img {
+  opacity: 0;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  position: absolute;
 }
-.wrapper .blur__white {
-  background: #fff;
+.wrapper .blur__blue img:nth-child(1) {
+  opacity: 1;
 }
-.wrapper .blur__red {
-  background: var(--red-400);
+.wrapper .blur__white img:nth-child(2) {
+  opacity: 1;
+}
+.wrapper .blur__red img:nth-child(3) {
+  opacity: 1;
+}
+.wrapper__top {
+  position: relative;
 }
 .wrapper__bottom {
   margin-top: 12px;
   border-top: 1px solid var(--border-default);
   display: none;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 .wrapper__bottom.active {
   display: block;

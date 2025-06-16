@@ -48,9 +48,9 @@ function switchBlur(colorClass) {
 
   void blur.offsetHeight;
 
-  requestAnimationFrame(() => {
+  setTimeout(() => {
     blur.classList.add(colorClass);
-  });
+  }, 100);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -575,11 +575,22 @@ function goTo(pageId) {
     activePage = pageId;
   }
 
-  const wrappers = document.querySelectorAll(".main");
-  wrappers.forEach((w) => w.classList.remove("active"));
-  const targetWrapper = document.getElementById(pageId);
-  if (targetWrapper) {
-    targetWrapper.classList.add("active");
+  const current = document.querySelector(".main.active");
+  if (current) {
+    current.classList.remove("fade-in");
+    current.classList.add("fade-out");
+
+    setTimeout(() => {
+      current.classList.remove("active", "fade-out");
+    }, 300);
+  }
+
+  const next = document.getElementById(pageId);
+  if (next) {
+    next.classList.add("active");
+    setTimeout(() => {
+      next.classList.add("fade-in");
+    }, 10);
   }
 
   document.querySelectorAll("main:not(#home) .buy__wrapper.success").forEach((wrapper) => wrapper.classList.remove("success"));
