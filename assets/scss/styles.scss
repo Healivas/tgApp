@@ -1215,6 +1215,12 @@ input[type=number] {
         }
       }
     }
+
+    .buy__star {
+      svg {
+        color: #8a8c8f;
+      }
+    }
   }
 
   &__recipient {
@@ -1520,7 +1526,6 @@ input[type=number] {
       width: 32px;
       height: 32px;
       transition: all .2s ease-in-out;
-      color: #8a8c8f;
       position: absolute;
       left: 0;
       transition: all .2s ease-in-out;

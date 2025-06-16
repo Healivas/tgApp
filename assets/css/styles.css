@@ -1235,6 +1235,9 @@ input[type=number] {
 .buy__wrapper.success .buy__star svg:nth-child(2) {
   opacity: 0;
 }
+.buy__wrapper .buy__star svg {
+  color: #8a8c8f;
+}
 .buy__recipient {
   font-weight: 400;
   font-size: 14px;
@@ -1588,7 +1591,6 @@ input[type=number] {
   height: 32px;
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
-  color: #8a8c8f;
   position: absolute;
   left: 0;
   transition: all 0.2s ease-in-out;
