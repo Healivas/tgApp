@@ -807,33 +807,20 @@ main {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.3s ease, transform 0.3s ease;
   width: 100%;
   max-width: 390px;
+  margin: 0 auto;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  transition: all .3s;
+  height: 0;
 
   &.active {
     visibility: visible;
     pointer-events: all;
     opacity: 1;
-  }
-
-  &.fade-in {
-    opacity: 1;
-    transform: translateX(-50%);
-    visibility: visible;
-    pointer-events: all;
-    z-index: 1;
-  }
-
-  &.fade-out {
-    opacity: 0;
-    transform: translateX(-50%);
-    pointer-events: none;
-    visibility: hidden;
-    z-index: 0;
+    height: auto;
   }
 }
 

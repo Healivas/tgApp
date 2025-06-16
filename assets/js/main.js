@@ -575,22 +575,11 @@ function goTo(pageId) {
     activePage = pageId;
   }
 
-  const current = document.querySelector(".main.active");
-  if (current) {
-    current.classList.remove("fade-in");
-    current.classList.add("fade-out");
-
-    setTimeout(() => {
-      current.classList.remove("active", "fade-out");
-    }, 300);
-  }
-
-  const next = document.getElementById(pageId);
-  if (next) {
-    next.classList.add("active");
-    setTimeout(() => {
-      next.classList.add("fade-in");
-    }, 10);
+  const wrappers = document.querySelectorAll(".main");
+  wrappers.forEach((w) => w.classList.remove("active"));
+  const targetWrapper = document.getElementById(pageId);
+  if (targetWrapper) {
+    targetWrapper.classList.add("active");
   }
 
   document.querySelectorAll("main:not(#home) .buy__wrapper.success").forEach((wrapper) => wrapper.classList.remove("success"));
@@ -605,6 +594,24 @@ function goTo(pageId) {
     transferInputValueToSum();
     updateCardSums();
   }
+
+  // Обновляем margin-top для .wrapper__bottom.active с учётом +12px
+  setTimeout(() => {
+    const mainActive = document.querySelector(".main.active");
+    const bottomPanels = document.querySelectorAll(".wrapper__bottom");
+
+    // Сброс margin-top у всех bottom-панелей
+    bottomPanels.forEach((panel) => {
+      panel.style.marginTop = "";
+    });
+
+    // Применяем margin-top только активной, если есть
+    const activeBottom = document.querySelector(".wrapper__bottom.active");
+    if (mainActive && activeBottom) {
+      const offset = mainActive.offsetHeight + 12;
+      activeBottom.style.marginTop = `${offset}px`;
+    }
+  }, 0);
 }
 
 function transferInputValueToSum() {
