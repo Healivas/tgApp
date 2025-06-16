@@ -1055,9 +1055,6 @@ main {
   height: 36px;
   z-index: 2;
 }
-.switch * {
-  z-index: 2;
-}
 
 .currency {
   width: 36px;
