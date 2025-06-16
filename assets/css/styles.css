@@ -1228,8 +1228,8 @@ input[type=number] {
 }
 
 .buy__wrapper.success .buy__star {
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+  -webkit-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
 }
 .buy__wrapper.success .buy__star svg {
   color: #FFCA55;
@@ -1590,11 +1590,8 @@ input[type=number] {
 .buy__star svg {
   width: 32px;
   height: 32px;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
   position: absolute;
   left: 0;
-  transition: all 0.2s ease-in-out;
 }
 .buy__actions {
   display: -webkit-box;

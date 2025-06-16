@@ -1205,7 +1205,7 @@ input[type=number] {
   &__wrapper {
     &.success {
       .buy__star {
-        transition: all .2s ease-in-out;
+        transition: color .2s ease-in-out;
 
         svg {
           color: #FFCA55;
@@ -1523,10 +1523,8 @@ input[type=number] {
     svg {
       width: 32px;
       height: 32px;
-      transition: all .2s ease-in-out;
       position: absolute;
       left: 0;
-      transition: all .2s ease-in-out;
     }
   }
 
