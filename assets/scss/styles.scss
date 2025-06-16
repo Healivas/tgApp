@@ -860,6 +860,7 @@ main {
     z-index: 0;
     pointer-events: none;
     transition: all .2s ease-in-out;
+    filter: blur(5px);
 
     img {
       opacity: 0;
