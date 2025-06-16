@@ -1628,7 +1628,7 @@ input[type=number] {
   transition: all 0.2s ease-in-out;
 }
 .buy__actions button:hover {
-  opacity: 0.8;
+  opacity: 0.7;
 }
 .buy__actions button span {
   font-size: 14px;
