@@ -1205,8 +1205,11 @@ input[type=number] {
   &__wrapper {
     &.success {
       .buy__star {
-        filter: drop-shadow(0 0 0 rgba(255, 174, 17, 0.4)) drop-shadow(0 0 8px rgba(255, 174, 17, 0.5));
         transition: all .2s ease-in-out;
+
+        svg {
+          color: #FFCA55;
+        }
 
         svg:nth-child(1) {
           opacity: 1;

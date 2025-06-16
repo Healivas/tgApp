@@ -1228,10 +1228,11 @@ input[type=number] {
 }
 
 .buy__wrapper.success .buy__star {
-  -webkit-filter: drop-shadow(0 0 0 rgba(255, 174, 17, 0.4)) drop-shadow(0 0 8px rgba(255, 174, 17, 0.5));
-          filter: drop-shadow(0 0 0 rgba(255, 174, 17, 0.4)) drop-shadow(0 0 8px rgba(255, 174, 17, 0.5));
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+}
+.buy__wrapper.success .buy__star svg {
+  color: #FFCA55;
 }
 .buy__wrapper.success .buy__star svg:nth-child(1) {
   opacity: 1;
