@@ -815,6 +815,7 @@ main {
   transform: translateX(-50%);
   transition: all .3s;
   height: 0;
+  overflow: hidden;
 
   &.active {
     visibility: visible;
@@ -832,7 +833,7 @@ main {
   justify-content: space-between;
   ms-overflow-style: none;
   scrollbar-width: none;
-  overflow-y: hidden;
+  overflow-y: auto;
 
   &::-webkit-scrollbar {
     display: none;

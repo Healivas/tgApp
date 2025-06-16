@@ -824,6 +824,7 @@ main {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   height: 0;
+  overflow: hidden;
 }
 .main.active {
   visibility: visible;
@@ -847,7 +848,7 @@ main {
           justify-content: space-between;
   ms-overflow-style: none;
   scrollbar-width: none;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 .wrapper::-webkit-scrollbar {
   display: none;
