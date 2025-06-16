@@ -594,24 +594,6 @@ function goTo(pageId) {
     transferInputValueToSum();
     updateCardSums();
   }
-
-  // Обновляем margin-top для .wrapper__bottom.active с учётом +12px
-  setTimeout(() => {
-    const mainActive = document.querySelector(".main.active");
-    const bottomPanels = document.querySelectorAll(".wrapper__bottom");
-
-    // Сброс margin-top у всех bottom-панелей
-    bottomPanels.forEach((panel) => {
-      panel.style.marginTop = "";
-    });
-
-    // Применяем margin-top только активной, если есть
-    const activeBottom = document.querySelector(".wrapper__bottom.active");
-    if (mainActive && activeBottom) {
-      const offset = mainActive.offsetHeight + 12;
-      activeBottom.style.marginTop = `${offset}px`;
-    }
-  }, 0);
 }
 
 function transferInputValueToSum() {

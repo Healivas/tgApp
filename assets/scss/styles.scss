@@ -832,7 +832,7 @@ main {
   justify-content: space-between;
   ms-overflow-style: none;
   scrollbar-width: none;
-  overflow-y: auto;
+  overflow-y: hidden;
 
   &::-webkit-scrollbar {
     display: none;
