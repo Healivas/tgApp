@@ -720,6 +720,12 @@ function updateHeaderForPage(pageId) {
       backHeader.classList.remove("active");
       historyHeader.classList.add("active");
       switchBlur("blur__transparent");
+
+      const activeMain = document.querySelector(".wrapper");
+      if (activeMain) {
+        activeMain.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
       break;
     default:
       currencyHeader.classList.remove("active");

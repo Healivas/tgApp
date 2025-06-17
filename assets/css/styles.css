@@ -1156,6 +1156,8 @@ main {
   border: 1px solid var(--border-default);
   background: var(--bg-input-soft);
   height: 73px;
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
 }
 .currency.active button:last-child {
   opacity: 1;
@@ -1232,13 +1234,21 @@ input[type=number] {
   transition: color 0.2s ease-in-out;
 }
 .buy__wrapper.success .buy__star svg {
-  color: #FFCA55;
-  overflow: visible;
   -webkit-filter: drop-shadow(0 0 0 rgba(255, 174, 17, 0.4)) drop-shadow(0 0 8px rgba(255, 174, 17, 0.5));
           filter: drop-shadow(0 0 0 rgba(255, 174, 17, 0.4)) drop-shadow(0 0 8px rgba(255, 174, 17, 0.5));
 }
+.buy__wrapper.success .buy__star svg path {
+  fill: url(#starGradient);
+}
 .buy__wrapper .buy__star svg {
-  color: #8a8c8f;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  overflow: visible;
+}
+.buy__wrapper .buy__star svg path {
+  fill: url(#grayGradient);
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .buy__recipient {
   font-weight: 400;
