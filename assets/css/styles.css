@@ -1640,6 +1640,10 @@ input[type=number] {
 
 .opacity {
   opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  height: 0;
+  margin: 32px auto 0px auto;
 }
 
 .history {
