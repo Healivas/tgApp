@@ -44,16 +44,12 @@ function switchBlur(colorClass) {
   const blur = document.querySelector(".blur");
   if (!blur) return;
 
-  // Если уже установлен нужный класс — выходим
   if (blur.classList.contains(colorClass)) return;
 
-  // Удаляем все возможные цветовые классы
   blur.classList.remove("blur__white", "blur__blue", "blur__red");
 
-  // Триггерим перерисовку, чтобы анимация сбросилась
   void blur.offsetHeight;
 
-  // Добавляем нужный цвет с небольшой задержкой
   setTimeout(() => {
     blur.classList.add(colorClass);
   }, 100);
@@ -137,41 +133,48 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-function updateInputWidth(input = null) {
-  if (input) {
-    const wrapper = input.closest(".buy__inner");
-    const ruler = wrapper?.querySelector(".ruler");
-    if (!ruler) return;
+function updateInputWidth(input) {
+  const value = input.value || input.placeholder;
 
-    const value = input.value || input.placeholder || "0";
-    ruler.textContent = value;
-    const width = ruler.offsetWidth;
-    input.style.width = `${width}px`;
-    return;
-  }
+  const span = document.createElement("span");
+  const styles = getComputedStyle(input);
 
-  const activeWrapper = document.querySelector(".main.active");
-  if (!activeWrapper) return;
+  span.style.visibility = "hidden";
+  span.style.position = "absolute";
+  span.style.whiteSpace = "pre";
 
-  const inputs = activeWrapper.querySelectorAll(".buy__input");
-  inputs.forEach((inp) => {
-    const wrapper = inp.closest(".buy__inner");
-    const ruler = wrapper?.querySelector(".ruler");
-    if (!ruler) return;
+  span.style.font = styles.font;
+  span.style.fontSize = styles.fontSize;
+  span.style.letterSpacing = styles.letterSpacing;
+  span.style.fontWeight = styles.fontWeight;
+  span.style.fontFamily = styles.fontFamily;
 
-    const value = inp.value || inp.placeholder || "0";
-    ruler.textContent = value;
-    const width = ruler.offsetWidth;
-    inp.style.width = `${width}px`;
-  });
+  span.textContent = value;
+  document.body.appendChild(span);
+
+  const width = span.offsetWidth;
+  input.style.width = width + "px";
+
+  span.remove();
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  const inputs = document.querySelectorAll(".input");
+
+  inputs.forEach((input) => {
+    updateInputWidth(input);
+
+    input.addEventListener("input", () => {
+      updateInputWidth(input);
+    });
+  });
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const inputs = document.querySelectorAll(".buy__input");
   const ruler = document.querySelectorAll(".ruler");
   const helpButtons = document.querySelectorAll(".buy__help button");
   const wrappers = document.querySelectorAll(".buy__wrapper");
-  const blur = document.querySelector(".blur");
 
   const buyInput = document.getElementById("buyInput");
   const buyButton = document.getElementById("buyButton");
@@ -489,9 +492,11 @@ async function updateCardSums() {
   });
 
   const cards = document.querySelectorAll(".card");
+  console.log(cards.length);
 
   cards.forEach((card) => {
     const bottom = card.querySelector(".card__bottom");
+    if (!bottom) return;
 
     if (card.innerHTML.includes("TON")) {
       bottom.textContent = `${tonSum} TON`;
@@ -587,14 +592,14 @@ function goTo(pageId) {
     activePage = pageId;
   }
 
-  const wrappers = document.querySelectorAll(".main");
+  const wrappers = document.querySelectorAll(".wrapper");
   wrappers.forEach((w) => w.classList.remove("active"));
   const targetWrapper = document.getElementById(pageId);
   if (targetWrapper) {
     targetWrapper.classList.add("active");
   }
 
-  document.querySelectorAll("main:not(#home):not(#purchase) .buy__wrapper.success").forEach((wrapper) => {
+  document.querySelectorAll(".wrapper:not(#home):not(#purchase) .buy__wrapper").forEach((wrapper) => {
     wrapper.classList.remove("success");
   });
 
@@ -608,21 +613,6 @@ function goTo(pageId) {
     transferInputValueToSum();
     updateCardSums();
   }
-
-  setTimeout(() => {
-    const mainActive = document.querySelector(".main.active");
-    const bottomPanels = document.querySelectorAll(".wrapper__bottom");
-
-    bottomPanels.forEach((panel) => {
-      panel.style.marginTop = "";
-    });
-
-    const activeBottom = document.querySelector(".wrapper__bottom.active");
-    if (mainActive && activeBottom) {
-      const offset = mainActive.offsetHeight + 12;
-      activeBottom.style.marginTop = `${offset}px`;
-    }
-  }, 0);
 }
 
 function transferInputValueToSum() {
@@ -672,65 +662,23 @@ function transferInputValueToSum() {
 }
 
 function updateHeaderForPage(pageId) {
-  const currencyHeader = document.getElementById("currencyHeader");
-  const backHeader = document.getElementById("backHeader");
-  const pageNameElement = document.getElementById("pageName");
-  const historyHeader = document.getElementById("historyHeader");
-
-  const pageTitles = {
-    home: "Главная",
-    buy: "Покупка",
-    gift: "Подарок",
-    purchase: "Выберите способ оплаты",
-    purchaseSuccess: "Заказ оплачен",
-    history: "История транзакций",
-  };
-
-  if (pageNameElement) {
-    pageNameElement.innerText = pageTitles[pageId] || "";
-  }
-
   switch (pageId) {
     case "home":
-      currencyHeader.classList.add("active");
-      backHeader.classList.remove("active");
-      historyHeader.classList.remove("active");
       switchBlur("blur__blue");
       clearInput("#giftInput", "gift");
       break;
     case "buy":
-      currencyHeader.classList.remove("active");
-      backHeader.classList.add("active");
-      historyHeader.classList.remove("active");
       switchBlur("blur__white");
       clearInput();
       break;
     case "gift":
-      currencyHeader.classList.remove("active");
-      backHeader.classList.add("active");
-      historyHeader.classList.remove("active");
       switchBlur("blur__white");
       clearInput();
       break;
     case "purchase":
       switchBlur("blur__white");
       break;
-    case "history":
-      currencyHeader.classList.remove("active");
-      backHeader.classList.remove("active");
-      historyHeader.classList.add("active");
-      switchBlur("blur__transparent");
-
-      const activeMain = document.querySelector(".wrapper");
-      if (activeMain) {
-        activeMain.scrollTo({ top: 0, behavior: "smooth" });
-      }
-
-      break;
     default:
-      currencyHeader.classList.remove("active");
-      backHeader.classList.add("active");
-      historyHeader.classList.remove("active");
       break;
   }
 
@@ -738,24 +686,6 @@ function updateHeaderForPage(pageId) {
     const userInput = document.getElementById("userInput");
     if (userInput) {
       userInput.value = "";
-    }
-  }
-
-  document.querySelectorAll(".wrapper__bottom").forEach((el) => {
-    el.classList.remove("active");
-  });
-
-  const bottomIdMap = {
-    buy: "buyBottom",
-    gift: "giftBottom",
-    purchase: "purchaseBottom",
-  };
-
-  const bottomId = bottomIdMap[pageId];
-  if (bottomId) {
-    const targetBottom = document.getElementById(bottomId);
-    if (targetBottom) {
-      targetBottom.classList.add("active");
     }
   }
 
@@ -814,4 +744,43 @@ document.addEventListener("DOMContentLoaded", () => {
   Telegram.WebApp.onEvent("themeChanged", () => {
     document.body.style.backgroundColor = "#0d1017";
   });
+});
+
+window.addEventListener(
+  "wheel",
+  function (e) {
+    if (e.ctrlKey) {
+      e.preventDefault();
+    }
+  },
+  { passive: false }
+);
+
+window.addEventListener("keydown", function (e) {
+  if (e.ctrlKey && (e.key === "+" || e.key === "-" || e.key === "=" || e.key === "_")) {
+    e.preventDefault();
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const header = document.querySelector(".header__fixed");
+  const history = document.querySelector(".history");
+  const page = document.querySelector(".page");
+
+  if (!header || !history || !page) {
+    return;
+  }
+
+  function checkScroll() {
+    const historyTop = history.getBoundingClientRect().top;
+
+    if (historyTop <= 30) {
+      header.classList.add("active");
+    } else {
+      header.classList.remove("active");
+    }
+  }
+
+  page.addEventListener("scroll", checkScroll);
+  checkScroll();
 });

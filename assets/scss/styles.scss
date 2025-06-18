@@ -785,6 +785,8 @@ html {
   scroll-behavior: smooth;
   display: flex;
   font-weight: 500;
+  touch-action: manipulation;
+  -ms-touch-action: manipulation;
   flex-direction: column
 }
 
@@ -796,16 +798,13 @@ html,
 body,
 .wrapper {
   width: 100%;
-  overflow-x: hidden;
 }
 
 main {
   flex: 1 1 auto
 }
 
-.vis {
-  overflow: visible !important;
-
+.anim {
   &.active {
     img {
       animation: fadeIn ease forwards;
@@ -814,37 +813,12 @@ main {
   }
 }
 
-.main {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  width: 100%;
-  max-width: 390px;
-  margin: 0 auto;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  transition: all .3s ease-in-out;
-  height: 0;
-  overflow: hidden;
-
-  &.active {
-    visibility: visible;
-    pointer-events: all;
-    opacity: 1;
-    height: auto;
-  }
-}
-
-.wrapper {
+.page {
   min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  justify-content: space-between;
   ms-overflow-style: none;
   scrollbar-width: none;
   overflow-y: auto;
+  position: relative;
 
   &::-webkit-scrollbar {
     display: none;
@@ -852,7 +826,7 @@ main {
 
   .blur {
     width: 100%;
-    max-width: 390px;
+    max-width: 425px;
     position: absolute;
     left: 50%;
     top: 0;
@@ -860,7 +834,6 @@ main {
     z-index: 0;
     pointer-events: none;
     transition: all .2s ease-in-out;
-    filter: blur(5px);
 
     img {
       opacity: 0;
@@ -886,6 +859,35 @@ main {
       }
     }
   }
+}
+
+.main {
+  width: 100%;
+  transition: all .3s ease-in-out;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: space-between;
+  min-height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  height: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all .3s ease-in-out;
+  overflow: hidden;
+
+  &.active {
+    visibility: visible;
+    pointer-events: all;
+    opacity: 1;
+    height: auto;
+  }
 
   &__top {
     position: relative;
@@ -894,12 +896,7 @@ main {
   &__bottom {
     margin-top: 12px;
     border-top: 1px solid var(--border-default);
-    display: none;
     transition: all .2s ease-in-out;
-
-    &.active {
-      display: block;
-    }
 
     .container {
       padding: 16px;
@@ -908,7 +905,7 @@ main {
 }
 
 .container {
-  max-width: 390px;
+  max-width: 425px;
   width: 100%;
   padding: 0 16px;
   margin: 0 auto;
@@ -1054,15 +1051,46 @@ main {
   justify-content: space-between;
   position: relative;
 
+  &__fixed {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    left: 0;
+    background: var(--bg-default);
+    transition: all .2s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+
+    &.active {
+      opacity: 1;
+      pointer-events: all;
+      visibility: visible;
+    }
+
+    .container {
+      position: relative;
+
+      &::after {
+        position: absolute;
+        content: '';
+        left: 0;
+        bottom: -16px;
+        width: 100%;
+        height: 16px;
+        background: linear-gradient(360deg, rgba(13, 16, 23, 0) 0%, #0d0f17 98.08%);
+        z-index: 1;
+        pointer-events: none;
+      }
+    }
+  }
+
   .container {
-    display: none;
     align-items: center;
     justify-content: space-between;
     padding: 16px;
-
-    &.active {
-      display: flex;
-    }
+    display: flex;
   }
 
   &__logo {
@@ -1570,10 +1598,20 @@ input[type=number] {
   margin: 32px auto 0px auto;
 }
 
+@keyframes fade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .history {
   display: flex;
   flex-direction: column;
   padding-bottom: 8px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fade .3s ease-in-out forwards;
 
   &__inner {
     display: flex;
@@ -1583,10 +1621,7 @@ input[type=number] {
 
   &__wrapper {
     position: relative;
-    max-width: 390px;
-    margin: 0 auto;
     width: 100%;
-    padding: 0 16px;
 
     &.empty {
       .history__empty {
@@ -1647,12 +1682,6 @@ input[type=number] {
     line-height: 143%;
     color: var(--zinc-00);
     margin-bottom: 16px;
-    cursor: pointer;
-    transition: all .2s ease-in-out;
-
-    &:hover {
-      opacity: .8;
-    }
   }
 
   .block {
