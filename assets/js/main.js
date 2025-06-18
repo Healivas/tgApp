@@ -606,7 +606,7 @@ function goTo(pageId) {
   document.querySelectorAll(".card.active").forEach((card) => {
     card.classList.remove("active");
   });
-
+  document.querySelector("#payButton").setAttribute("disabled", "");
   updateHeaderForPage(pageId);
 
   if (pageId === "purchase") {
