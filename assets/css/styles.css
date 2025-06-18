@@ -840,6 +840,9 @@ main {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
+.page .blur__stars {
+  opacity: 1 !important;
+}
 .page .blur img {
   opacity: 0;
   -webkit-transition: all 0.2s ease-in-out;
@@ -900,6 +903,7 @@ main {
   border-top: 1px solid var(--border-default);
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+  background: var(--bg-default);
 }
 .wrapper__bottom .container {
   padding: 16px;
@@ -1045,7 +1049,6 @@ main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  border: 1px solid transparent;
 }
 .button__circle svg {
   width: 20px;

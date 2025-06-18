@@ -835,6 +835,10 @@ main {
     pointer-events: none;
     transition: all .2s ease-in-out;
 
+    &__stars {
+      opacity: 1 !important;
+    }
+
     img {
       opacity: 0;
       transition: all .2s ease-in-out;
@@ -897,6 +901,7 @@ main {
     margin-top: 12px;
     border-top: 1px solid var(--border-default);
     transition: all .2s ease-in-out;
+    background: var(--bg-default);
 
     .container {
       padding: 16px;
@@ -1020,7 +1025,6 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid transparent;
 
     svg {
       width: 20px;
