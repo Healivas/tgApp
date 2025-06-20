@@ -829,7 +829,7 @@ main {
 }
 .page .blur {
   width: 100%;
-  max-width: 425px;
+  max-width: 500px;
   position: absolute;
   left: 50%;
   top: 0;
@@ -840,9 +840,6 @@ main {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-.page .blur__stars {
-  opacity: 1 !important;
-}
 .page .blur img {
   opacity: 0;
   -webkit-transition: all 0.2s ease-in-out;
@@ -852,11 +849,20 @@ main {
 .page .blur__blue img:nth-child(1) {
   opacity: 1;
 }
+.page .blur__blue .blur__stars {
+  opacity: 0.3;
+}
 .page .blur__white img:nth-child(2) {
   opacity: 1;
 }
+.page .blur__white .blur__stars {
+  opacity: 0.3;
+}
 .page .blur__red img:nth-child(3) {
   opacity: 1;
+}
+.page .blur__red .blur__stars {
+  opacity: 0.3;
 }
 
 .main {
@@ -910,7 +916,7 @@ main {
 }
 
 .container {
-  max-width: 425px;
+  max-width: 500px;
   width: 100%;
   padding: 0 16px;
   margin: 0 auto;

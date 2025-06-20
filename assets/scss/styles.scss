@@ -826,7 +826,7 @@ main {
 
   .blur {
     width: 100%;
-    max-width: 425px;
+    max-width: 500px;
     position: absolute;
     left: 50%;
     top: 0;
@@ -834,10 +834,6 @@ main {
     z-index: 0;
     pointer-events: none;
     transition: all .2s ease-in-out;
-
-    &__stars {
-      opacity: 1 !important;
-    }
 
     img {
       opacity: 0;
@@ -849,17 +845,29 @@ main {
       img:nth-child(1) {
         opacity: 1;
       }
+
+      .blur__stars {
+        opacity: .3;
+      }
     }
 
     &__white {
       img:nth-child(2) {
         opacity: 1;
       }
+
+      .blur__stars {
+        opacity: .3;
+      }
     }
 
     &__red {
       img:nth-child(3) {
         opacity: 1;
+      }
+
+      .blur__stars {
+        opacity: .3;
       }
     }
   }
@@ -910,7 +918,7 @@ main {
 }
 
 .container {
-  max-width: 425px;
+  max-width: 500px;
   width: 100%;
   padding: 0 16px;
   margin: 0 auto;
