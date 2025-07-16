@@ -784,3 +784,22 @@ document.addEventListener("DOMContentLoaded", function () {
   page.addEventListener("scroll", checkScroll);
   checkScroll();
 });
+
+(async () => {
+  try {
+    const response = await fetch("/api/v1/auth/webapp", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        initData: Telegram.WebApp.initData,
+      }),
+    });
+
+    const data = await response.json();
+    console.log("Ответ от /api/v1/auth/webapp:", data);
+  } catch (error) {
+    console.error("Ошибка при запросе /api/v1/auth/webapp:", error);
+  }
+})();
