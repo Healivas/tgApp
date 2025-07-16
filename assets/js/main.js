@@ -799,18 +799,14 @@ document.addEventListener("DOMContentLoaded", function () {
       }),
     });
 
-    const data = await response.json();
-
-    if (outputBlock) {
+    const text = await response.text(); // читаем как текст
+    try {
+      const data = JSON.parse(text); // пробуем распарсить как JSON
       outputBlock.textContent = JSON.stringify(data, null, 2);
-    } else {
-      console.warn('Элемент с id="test" не найден в DOM.');
+    } catch (parseError) {
+      outputBlock.textContent = `Ответ не является JSON:\n\n${text}`;
     }
   } catch (error) {
-    if (outputBlock) {
-      outputBlock.textContent = "Ошибка при запросе: " + error.message;
-    } else {
-      console.error("Ошибка при запросе /api/v1/auth/webapp:", error);
-    }
+    outputBlock.textContent = "Ошибка при запросе: " + error.message;
   }
 })();
