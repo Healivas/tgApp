@@ -786,6 +786,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 (async () => {
+  const outputBlock = document.getElementById("test");
+
   try {
     const response = await fetch("/api/v1/auth/webapp", {
       method: "POST",
@@ -798,8 +800,17 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     const data = await response.json();
-    console.log("Ответ от /api/v1/auth/webapp:", data);
+
+    if (outputBlock) {
+      outputBlock.textContent = JSON.stringify(data, null, 2);
+    } else {
+      console.warn('Элемент с id="test" не найден в DOM.');
+    }
   } catch (error) {
-    console.error("Ошибка при запросе /api/v1/auth/webapp:", error);
+    if (outputBlock) {
+      outputBlock.textContent = "Ошибка при запросе: " + error.message;
+    } else {
+      console.error("Ошибка при запросе /api/v1/auth/webapp:", error);
+    }
   }
 })();
