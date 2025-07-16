@@ -789,7 +789,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const outputBlock = document.getElementById("test");
 
   try {
-    const response = await fetch("/api/v1/auth/webapp", {
+    const response = await fetch("https://stars.noton.tg/api/v1/auth/webapp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -799,14 +799,18 @@ document.addEventListener("DOMContentLoaded", function () {
       }),
     });
 
-    const text = await response.text(); // читаем как текст
-    try {
-      const data = JSON.parse(text); // пробуем распарсить как JSON
+    const data = await response.json();
+
+    if (outputBlock) {
       outputBlock.textContent = JSON.stringify(data, null, 2);
-    } catch (parseError) {
-      outputBlock.textContent = `Ответ не является JSON:\n\n${text}`;
+    } else {
+      console.warn('Элемент с id="test" не найден в DOM.');
     }
   } catch (error) {
-    outputBlock.textContent = "Ошибка при запросе: " + error.message;
+    if (outputBlock) {
+      outputBlock.textContent = "Ошибка при запросе: " + error.message;
+    } else {
+      console.error("Ошибка при запросе /api/v1/auth/webapp:", error);
+    }
   }
 })();
